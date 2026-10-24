@@ -121,7 +121,7 @@
     loadedImage.onload = () => {
       if (version !== sceneVersion) return;
       image.src = source;
-      if (!motionPreference.matches && typeof image.animate === 'function') {
+      if (!motionPreference.matches && !document.body.classList.contains('motion-paused') && typeof image.animate === 'function') {
         image.animate([{ opacity: 0.75, transform: 'scale(1.025)' }, { opacity: 1, transform: 'scale(1)' }], { duration: 420, easing: 'ease-out' });
       }
     };

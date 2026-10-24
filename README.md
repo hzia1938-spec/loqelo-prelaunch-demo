@@ -38,3 +38,9 @@ The page is checked in a desktop browser and at a narrow viewport. Form validati
 ## Modern design update
 
 The second design pass improves type size and contrast, navigation across tablet widths, service imagery, audience selection, the interactive product story, and keyboard/focus behavior. No real mailing service is connected.
+
+## Motion graphics
+
+`motion.css` and `motion.js` add a four-stage animated product story, an entrance sequence, gentle decorative movement, and small interface transitions. The story is an illustrative preview, not a live request or real offers. It uses native CSS, SVG and browser animations, with no external animation library. All motion text is available in English, Polish and German.
+
+The master pause/play controls share one state and remember the visitor's choice locally. The story suspends when off screen or when the tab is hidden, supports manual step selection/restart, and starts paused for visitors requesting reduced motion. The original text explanation remains accessible.
