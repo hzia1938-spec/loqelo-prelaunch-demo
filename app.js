@@ -3,8 +3,8 @@
   const $ = (selector) => document.querySelector(selector);
   const $$ = (selector) => [...document.querySelectorAll(selector)];
   const config = window.LOQELO_CONFIG || {};
-  const safeRead = (storage, key) => { try { return storage.getItem(key); } catch { return null; } };
-  const safeWrite = (storage, key, value) => { try { storage.setItem(key, value); return true; } catch { return false; } };
+  const safeRead = (storageName, key) => { try { return window[storageName].getItem(key); } catch { return null; } };
+  const safeWrite = (storageName, key, value) => { try { window[storageName].setItem(key, value); return true; } catch { return false; } };
   const en = Object.fromEntries($$('[data-i18n]').map(el => [el.dataset.i18n, [...el.childNodes].map(n => n.nodeName === 'BR' ? '\n' : n.textContent).join('')]));
   Object.assign(en, {
     countryProvider: 'Country where you provide services',
@@ -26,14 +26,38 @@
   const de = {
     skip:'Zum Inhalt springen',announcement:'Bald wird das Erledigen einfacher.',date:'Februar 2027',navHow:'So funktioniert’s',navFor:'Für dich gemacht',navPeek:'Ein erster Blick',language:'Sprache wählen',join:'Zur Warteliste',heroEyebrow:'WENIGER SUCHEN. MEHR LEBEN.',heroOne:'Alles, was',heroTwo:'dein Zuhause',heroThree:'braucht.',heroDescription:'Von kleinen Reparaturen bis zu großen Plänen. Finde passende lokale Profis für dein Zuhause, deinen Garten und dein Büro — alles an einem Ort.',earlyAccess:'Früh dabei sein',watch:'Loqelo kennenlernen',heroNote:'Erfahre es zuerst. Ganz unverbindlich, voller Möglichkeiten.',visualNote:'DER ALLTAG. EIN BISSCHEN LEICHTER.',photoCaption:'Dein Zuhause. In guten Händen.',requestTitle:'Es beginnt mit einem einfachen Satz.',sampleRequest:'„Meine Fenster brauchen eine Reinigung und der Garten soll fit für den Frühling werden.“',windowTag:'Fensterreinigung',gardenTag:'Gartenarbeit',matched:'Gefunden',previewNote:'Ein kleiner Vorgeschmack auf das, was kommt.',promiseIntro:'Hier findet das Leben statt.\nWir helfen dir, dich darum zu kümmern.',yourHome:'Dein Zuhause',yourGarden:'Dein Garten',yourOffice:'Dein Büro',andBeyond:'Und alles dazwischen. ↗',possibilityEyebrow:'GROSSE PLÄNE. KLEINE ALLTAGSAUFGABEN.',possibilityOne:'Ein Ort.',possibilityTwo:'So viele Möglichkeiten.',possibilityDescription:'Ein Zuhause zum Wohlfühlen. Ein Garten zum Genießen. Ein Büro, das funktioniert. Für jede Aufgabe gibt es die passende Person.',catHome:'Mehr Wohlfühlen.',catHomeDescription:'Reinigung, Reparaturen und die „Mache ich später“-Aufgaben.',catGarden:'Ein bisschen grüner.',catGardenDescription:'Gartenpflege, Projekte im Freien und neue Anfänge.',catOffice:'Raum für mehr.',catOfficeDescription:'Installationen, Wartung und ein besserer Arbeitsplatz.',howEyebrow:'VON „ICH BRAUCHE“ ZU „ERLEDIGT“.',howTitle:'Aus der Aufgabenliste\nwird die Erledigt-Liste.',howDescription:'Kein endloses Suchen. Kein wiederholtes Erklären. Einfach ein leichterer Weg, Unterstützung zu finden.',stepOneTitle:'Sag uns, was du brauchst.',stepOneDescription:'Kleine Reparatur oder große Idee? Beschreibe es mit deinen eigenen Worten. Füge bei Bedarf ein Foto hinzu.',stepOneExample:'„Die Küche braucht einen neuen Anstrich.“',stepTwoTitle:'Die passenden Profis finden dich.',stepTwoDescription:'Loqelo verbindet deine Anfrage mit passenden Dienstleistern. So kommen die Angebote zu dir.',stepTwoExample:'Lokales Wissen. Weniger Aufwand.',stepThreeTitle:'Wähle deine Unterstützung.',stepThreeDescription:'Vergleiche Angebote und entscheide, wer am besten zu deinem Projekt passt.',stepThreeExample:'Dein nächstes Projekt kommt voran.',platformEyebrow:'EIN ERSTER BLICK AUF LOQELO',platformTitle:'Einfacher.\nAb dem ersten Klick.',platformDescription:'Anfragen, Angebote und Gespräche an einem Ort. Entdecke einen ersten Einblick in die Plattform.',tourRequest:'Deine Anfrage',tourOffers:'Deine Angebote',tourProvider:'Dein Geschäft',tourRequestDescription:'Einmal beschreiben. Loqelo hilft dir, daraus die passende Serviceanfrage zu machen.',tourOffersDescription:'Vergleiche Angebote für dein Projekt und wähle den passenden Dienstleister.',tourProviderDescription:'Entdecke passende Aufträge und verwalte deine Arbeit über ein übersichtliches Dashboard.',productSticker:'Lokale Kontakte.\nNeue Möglichkeiten.',screenNote:'Offizielle Plattformvorschau · Design kann sich ändern',storyEyebrow:'KLEINE MOMENTE. GROSSER UNTERSCHIED.',storyTitle:'Weniger Aufgaben.\nMehr vom Leben.',storyDescription:'Wir entwickeln Loqelo aus einer einfachen Idee: Hilfe für deinen Ort zu finden, sollte leicht sein. Sieh zu, wie die Idee Wirklichkeit wird.',storyButton:'Die Loqelo-Geschichte ansehen',videoLabel:'Ein bisschen Hilfe verändert alles.',providerEyebrow:'GUT IN DEM, WAS DU TUST?',providerTitle:'Dein nächster Kunde könnte gleich um die Ecke sein.',providerDescription:'Zeige dein Können Menschen, die es brauchen. Trag dich als Dienstleister ein und sei bereit für neue Möglichkeiten.',providerButton:'Ich bin Dienstleister',waitlistEyebrow:'DEIN NÄCHSTES KAPITEL BEGINNT HIER',waitlistOne:'Gute Dinge',waitlistTwo:'kommen bald.',waitlistThree:'Sei dabei.',waitlistDescription:'Ein einfacherer Weg, Hilfe zu finden. Ein neuer Weg zu Kunden. Hinterlasse deine E-Mail-Adresse und erfahre, wann Loqelo bereit ist.',launchMonth:'FEB',launchTitle:'Ein neuer Anfang steht bevor.',launchDescription:'Geplanter Start: Februar 2027',formTitle:'Machen wir Platz für Besseres.',formIntro:'Wähle deine Seite. Wir kümmern uns um den Rest.',customer:'Ich suche Hilfe',provider:'Ich biete Dienste an',emailLabel:'E-Mail-Adresse',countryLabel:'Dein Land',countryProvider:'Land, in dem du Dienste anbietest',countryPlaceholder:'Land auswählen',typeLabel:'Ich bin',optional:'(optional)',typePlaceholder:'Eine Option wählen',individual:'Eine Privatperson',business:'Ein Unternehmen',consentText:'Ich möchte Neuigkeiten zum Start und Updates von Loqelo erhalten. Ich kann mich jederzeit abmelden.',privacyLink:'Datenschutzhinweis',formSubmit:'Ich bin dabei',formReassurance:'Nur gute Neuigkeiten. Dein Postfach bleibt deins.',demoNote:'Interaktive Demo: Einträge bleiben nur in diesem Browser. Es wird keine E-Mail gesendet.',successEyebrow:'AUF NEUE MÖGLICHKEITEN',successTitle:'Du stehst auf der Demo-Liste.',successDescription:'Dein Eintrag wurde in diesem Browser gespeichert. In der Live-Version beginnt hier deine Reise mit Loqelo.',export:'Demo-CSV herunterladen',another:'Einen weiteren Eintrag testen',faqEyebrow:'EIN PAAR GUTE FRAGEN',faqTitle:'Du möchtest\nmehr wissen?',faqOneQ:'Was ist Loqelo?',faqOneA:'Loqelo ist eine kommende Plattform, die Menschen mit Dienstleistern für Haus, Garten und Büro verbindet. Beschreibe deinen Bedarf, erhalte Angebote und wähle einen Anbieter.',faqTwoQ:'Wann startet Loqelo?',faqTwoA:'Der geplante Start ist im Februar 2027. Trag dich ein, um Neuigkeiten und Informationen zur Verfügbarkeit in deinem Land zu erhalten.',faqThreeQ:'Kann ich als Dienstleister mitmachen?',faqThreeA:'Natürlich. Ob selbstständig oder mit einem Unternehmen: Wähle „Ich biete Dienste an“ und gib an, in welchem Land du arbeitest.',faqFourQ:'Ist dies bereits der Live-Service?',faqFourA:'Dies ist eine Vorschau-Website. Die Plattformbilder zeigen das geplante Erlebnis. Demo-Einträge bleiben im Browser und werden keiner echten Mailingliste hinzugefügt.',footerTagline:'Alles, was dein Zuhause braucht.',footerCta:'Gute Dinge kommen. Sei dabei ↗',footerRights:'Ein Konzept vor dem Start.',cookieSettings:'Cookie-Einstellungen',demoBadge:'DEMO',videoCredit:'Der offizielle Loqelo-Werbefilm.',privacyTitle:'Deine Privatsphäre. Klar erklärt.',privacyBody:'Diese öffentliche Konzept-Demo speichert Formulareinträge nur im Sitzungsspeicher dieses Browsers. Es werden keine E-Mails gesendet und keine Daten an ein Marketingsystem übermittelt. Die Einträge verschwinden, wenn die Browser-Sitzung dieses Tabs endet. Du kannst lokale Demo-Einträge exportieren oder löschen.',privacyAnalytics:'In dieser Demo sind Analysen deaktiviert. Einstellungen werden lokal gespeichert. Ein Live-Betrieb benötigt eigene Datenschutzhinweise, einen Mailing-Dienst und eine Einwilligungskonfiguration.',hostingNotice:'GitHub Pages stellt diese Website bereit und kann technische Verbindungsdaten verarbeiten.',hostingPolicy:'GitHub-Datenschutzerklärung ↗',deleteEntries:'Lokale Demo-Einträge löschen',done:'Fertig',cookieTitle:'Ein bisschen Wahlfreiheit tut gut.',cookieBody:'Notwendiger Speicher merkt sich Sprache und Datenschutzauswahl. Optionale Analysen könnten Besuche und Anmeldequoten messen, ohne E-Mail-Adressen oder Formularinhalte zu teilen. In dieser Demo ist kein Analysedienst eingerichtet.',essentialOnly:'Nur notwendige',allowAnalytics:'Analysen erlauben',requestAlt:'Offizielle Loqelo-Vorschau: einen Auftrag mit eigenen Worten beschreiben',offersAlt:'Offizielle Loqelo-Vorschau: Angebote von Dienstleistern vergleichen',providerAlt:'Offizielle Loqelo-Vorschau: Dashboard für Dienstleister und Aufträge in der Nähe',formFailed:'Dein Eintrag konnte nicht gespeichert werden. Bitte versuche es erneut.',waitMoment:'Überprüfe deine Angaben und versuche es in einem Moment erneut.',saving:'Dein Platz wird gespeichert…',deleted:'Deine lokalen Demo-Einträge wurden gelöscht.',realSuccessTitle:'Du stehst auf der Liste.',realSuccessDescription:'Vielen Dank. Wir informieren dich über den Start und die Verfügbarkeit in deinem Land.'
   };
+  Object.assign(en, {
+    menuOpen: 'Open navigation', menuClose: 'Close navigation', homeLabel: 'Loqelo home',
+    mainNavigation: 'Main navigation', mobileNavigation: 'Mobile navigation',
+    platformPreview: 'Platform preview', signupRoleLabel: 'I am joining as',
+    playVideo: 'Play the official Loqelo promotional video', videoDialog: 'Loqelo promotional video',
+    closeVideo: 'Close video', closePrivacy: 'Close privacy notice', closeCookies: 'Close cookie preferences',
+    memorySuccessDescription: 'Your entry is available only on this open page because browser storage is unavailable. Download it below to keep a copy. Refreshing or closing this tab will remove it. No email was sent.'
+  });
+  Object.assign(pl, {
+    menuOpen: 'Otwórz nawigację', menuClose: 'Zamknij nawigację', homeLabel: 'Strona główna Loqelo',
+    mainNavigation: 'Nawigacja główna', mobileNavigation: 'Nawigacja mobilna',
+    platformPreview: 'Podgląd platformy', signupRoleLabel: 'Dołączam jako',
+    playVideo: 'Odtwórz oficjalny film promocyjny Loqelo', videoDialog: 'Film promocyjny Loqelo',
+    closeVideo: 'Zamknij film', closePrivacy: 'Zamknij informację o prywatności', closeCookies: 'Zamknij ustawienia cookies',
+    memorySuccessDescription: 'Twój zapis jest dostępny tylko na tej otwartej stronie, ponieważ pamięć przeglądarki jest niedostępna. Pobierz go poniżej, aby zachować kopię. Odświeżenie lub zamknięcie karty usunie zapis. Nie wysłano emaila.'
+  });
+  Object.assign(de, {
+    menuOpen: 'Navigation öffnen', menuClose: 'Navigation schließen', homeLabel: 'Loqelo-Startseite',
+    mainNavigation: 'Hauptnavigation', mobileNavigation: 'Mobile Navigation',
+    platformPreview: 'Plattformvorschau', signupRoleLabel: 'Ich melde mich an als',
+    playVideo: 'Offiziellen Loqelo-Werbefilm abspielen', videoDialog: 'Loqelo-Werbefilm',
+    closeVideo: 'Video schließen', closePrivacy: 'Datenschutzhinweis schließen', closeCookies: 'Cookie-Einstellungen schließen',
+    memorySuccessDescription: 'Dein Eintrag ist nur auf dieser geöffneten Seite verfügbar, da der Browserspeicher nicht verfügbar ist. Lade ihn unten herunter, um eine Kopie zu behalten. Beim Neuladen oder Schließen dieses Tabs wird er gelöscht. Es wurde keine E-Mail gesendet.'
+  });
   const dictionaries = { en, pl, de };
   const browserLanguage = (navigator.language || 'en').slice(0, 2);
-  let language = safeRead(localStorage, 'loqelo-language') || browserLanguage;
+  let language = safeRead('localStorage', 'loqelo-language') || browserLanguage;
   if (!dictionaries[language]) language = 'en';
   let signupRole = 'customer';
   let selectedTour = 'request';
   let demoEntries = [];
-  try { demoEntries = JSON.parse(safeRead(sessionStorage, 'loqelo-demo-signups') || '[]'); if (!Array.isArray(demoEntries)) demoEntries = []; } catch { demoEntries = []; }
+  try { demoEntries = JSON.parse(safeRead('sessionStorage', 'loqelo-demo-signups') || '[]'); if (!Array.isArray(demoEntries)) demoEntries = []; } catch { demoEntries = []; }
   const text = key => dictionaries[language][key] || en[key] || key;
   const setText = (el, value) => {
     el.replaceChildren(...value.split('\n').flatMap((part, i) => i ? [document.createElement('br'), document.createTextNode(part)] : [document.createTextNode(part)]));
@@ -58,6 +82,7 @@
     renderCountries();
     setRole(signupRole);
     updateTourCaption();
+    renderAccessibleLabels();
   }
   function setRole(role) {
     signupRole = role;
@@ -84,7 +109,7 @@
     $('#tour-panel').scrollLeft = 0;
     updateTourCaption();
   }
-  $('#language').addEventListener('change', e => { language = e.target.value; safeWrite(localStorage, 'loqelo-language', language); renderLanguage(); });
+  $('#language').addEventListener('change', e => { language = e.target.value; safeWrite('localStorage', 'loqelo-language', language); renderLanguage(); });
   $$('[data-signup-role]').forEach(button => button.addEventListener('click', () => setRole(button.dataset.signupRole)));
   $$('[data-role-choice]').forEach(link => link.addEventListener('click', () => { showForm(); setRole(link.dataset.roleChoice); }));
   $$('[data-tour]').forEach(button => button.addEventListener('click', () => setTour(button.dataset.tour)));
@@ -98,14 +123,33 @@
     }
   });
   const menuButton = $('.menu-button');
-  menuButton.addEventListener('click', () => {
-    const expanded = menuButton.getAttribute('aria-expanded') === 'true';
-    menuButton.setAttribute('aria-expanded', String(!expanded));
-    menuButton.setAttribute('aria-label', expanded ? 'Open navigation' : 'Close navigation');
-    $('#mobile-nav').hidden = expanded;
+  const mobileNav = $('#mobile-nav');
+  function setMenu(open, restoreFocus = false) {
+    menuButton.setAttribute('aria-expanded', String(open));
+    menuButton.setAttribute('aria-label', text(open ? 'menuClose' : 'menuOpen'));
+    mobileNav.hidden = !open;
+    if (!open && restoreFocus) menuButton.focus();
+  }
+  function renderAccessibleLabels() {
+    const labels = {
+      '.brand': 'homeLabel', '.desktop-nav': 'mainNavigation', '#mobile-nav': 'mobileNavigation',
+      '#language': 'language', '.tour-tabs': 'platformPreview', '.role-tabs': 'signupRoleLabel',
+      '.video-preview': 'playVideo', '#video-dialog': 'videoDialog',
+      '#video-dialog .dialog-close': 'closeVideo', '#privacy-dialog .dialog-close': 'closePrivacy',
+      '#cookies-dialog .dialog-close': 'closeCookies'
+    };
+    Object.entries(labels).forEach(([selector, key]) => $$(selector).forEach(el => el.setAttribute('aria-label', text(key))));
+    menuButton.setAttribute('aria-label', text(menuButton.getAttribute('aria-expanded') === 'true' ? 'menuClose' : 'menuOpen'));
+  }
+  menuButton.addEventListener('click', () => setMenu(menuButton.getAttribute('aria-expanded') !== 'true'));
+  $$('#mobile-nav a').forEach(link => link.addEventListener('click', () => setMenu(false)));
+  document.addEventListener('keydown', e => {
+    if (e.key === 'Escape' && menuButton.getAttribute('aria-expanded') === 'true' && !$('dialog[open]')) {
+      e.preventDefault();
+      setMenu(false, true);
+    }
   });
-  $$('#mobile-nav a').forEach(link => link.addEventListener('click', () => { menuButton.setAttribute('aria-expanded', 'false'); $('#mobile-nav').hidden = true; }));
-  document.addEventListener('keydown', e => { if (e.key === 'Escape') { menuButton.setAttribute('aria-expanded', 'false'); $('#mobile-nav').hidden = true; } });
+  window.matchMedia('(min-width: 981px)').addEventListener('change', event => { if (event.matches) setMenu(false); });
   $$('.watch-button').forEach(button => button.addEventListener('click', () => { $('#video-dialog').showModal(); $('#video-dialog video').play().catch(() => {}); analyticsEvent('video_open'); }));
   $('#video-dialog').addEventListener('close', () => $('#video-dialog video').pause());
   $$('.privacy-button').forEach(button => button.addEventListener('click', () => $('#privacy-dialog').showModal()));
@@ -115,7 +159,7 @@
     dialog.querySelector('.dialog-close').addEventListener('click', () => dialog.close());
     dialog.addEventListener('click', event => { if (event.target === dialog) { const r = dialog.getBoundingClientRect(); if (event.clientX < r.left || event.clientX > r.right || event.clientY < r.top || event.clientY > r.bottom) dialog.close(); } });
   });
-  let analyticsConsent = safeRead(localStorage, 'loqelo-analytics-consent') === 'granted';
+  let analyticsConsent = safeRead('localStorage', 'loqelo-analytics-consent') === 'granted';
   let analyticsInitialized = false;
   const validGaId = /^G-[A-Z0-9]+$/.test(config.gaMeasurementId || '');
   function initAnalytics() {
@@ -138,7 +182,7 @@
   }
   function setConsent(granted) {
     analyticsConsent = granted;
-    safeWrite(localStorage, 'loqelo-analytics-consent', granted ? 'granted' : 'denied');
+    safeWrite('localStorage', 'loqelo-analytics-consent', granted ? 'granted' : 'denied');
     if (validGaId) window[`ga-disable-${config.gaMeasurementId}`] = !granted;
     if (window.gtag) window.gtag('consent', 'update', { analytics_storage: granted ? 'granted' : 'denied' });
     if (granted) initAnalytics();
@@ -184,11 +228,16 @@
       } else {
         const existingIndex = demoEntries.findIndex(item => item.email === record.email && item.audience === record.audience);
         if (existingIndex >= 0) demoEntries[existingIndex] = record; else demoEntries.push(record);
-        safeWrite(sessionStorage, 'loqelo-demo-signups', JSON.stringify(demoEntries));
+        const stored = safeWrite('sessionStorage', 'loqelo-demo-signups', JSON.stringify(demoEntries));
+        const description = $('.signup-success>p');
+        description.dataset.i18n = stored ? 'successDescription' : 'memorySuccessDescription';
+        description.textContent = text(description.dataset.i18n);
       }
       $('.signup-content').hidden = true;
       $('.signup-success').hidden = false;
       if (config.waitlistEndpoint) {
+        $('.signup-success h3').dataset.i18n = 'realSuccessTitle';
+        $('.signup-success>p').dataset.i18n = 'realSuccessDescription';
         $('.signup-success h3').textContent = text('realSuccessTitle');
         $('.signup-success>p').textContent = text('realSuccessDescription');
         $('#export-signups').hidden = true;
@@ -218,7 +267,7 @@
   });
   $('#delete-signups').addEventListener('click', () => {
     demoEntries = [];
-    try { sessionStorage.removeItem('loqelo-demo-signups'); } catch { /* memory-only mode */ }
+    try { window.sessionStorage.removeItem('loqelo-demo-signups'); } catch { /* memory-only mode */ }
     form.reset();
     showForm();
     $('#delete-status').textContent = text('deleted');
@@ -229,4 +278,5 @@
   if (config.waitlistEndpoint) {
     $$('.demo-note').forEach(el => el.hidden = true);
   }
+  $('.form-submit').disabled = false;
 })();

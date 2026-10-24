@@ -6,9 +6,12 @@ A responsive, buildless landing page using the official logo, Outfit and DM Sans
 
 Open `index.html`, or serve this folder with `python3 -m http.server 8787`. There are no packages, build steps, paid subscriptions or framework dependencies.
 
-- Edit English content in `index.html`, translations in `app.js`, appearance in `styles.css`.
+- Edit English content in `index.html`, translations in `app.js` and `enhancements.js`, and appearance in `styles.css` and `modern.css`.
 - The page supports English, Polish and German. Initial language follows the browser preference and visitors can change it manually. Country selection uses localized country names; this demo does not perform IP geolocation.
 - The product preview tabs, mobile navigation, FAQs, privacy controls and official promotional video work without third-party services.
+- A customer/provider switch carries the selected audience into the waitlist. Home, Garden and Office scene selectors use clean supplied photography.
+- The request explorer demonstrates local keyword matching with editable examples in all three languages. It is clearly labeled as an illustrative preview and sends no request.
+- Scroll reveals respect reduced motion, and a reading-progress indicator improves orientation. Content remains visible without the enhancement script. A JavaScript fallback notice links directly to the film.
 
 ## Demo forms
 
@@ -31,3 +34,7 @@ The site is hosted on GitHub Pages from this repository's root. Future pushes up
 ## Verification
 
 The page is checked in a desktop browser and at a narrow viewport. Form validation, both roles, local confirmation, country selection, translations, product tour tabs, video loading, privacy controls and local-data deletion are exercised. A real mail integration and analytics account are not configured.
+
+## Modern design update
+
+The second design pass improves type size and contrast, navigation across tablet widths, service imagery, audience selection, the interactive product story, and keyboard/focus behavior. No real mailing service is connected.
