@@ -44,3 +44,11 @@ The second design pass improves type size and contrast, navigation across tablet
 `motion.css` and `motion.js` add a four-stage animated product story, an entrance sequence, gentle decorative movement, and small interface transitions. The story is an illustrative preview, not a live request or real offers. It uses native CSS, SVG and browser animations, with no external animation library. All motion text is available in English, Polish and German.
 
 The master pause/play controls share one state and remember the visitor's choice locally. The story suspends when off screen or when the tab is hidden, supports manual step selection/restart, and starts paused for visitors requesting reduced motion. The original text explanation remains accessible.
+
+## Original Blender 3D hero
+
+The hero features a custom Blender miniature of a home, garden and workspace. Three transparent WebP renders provide immediate, lightweight views. “Explore in 3D” loads the self-hosted model-viewer 4.4.0 component and GLB only after a visitor asks to interact. Dragging rotates the actual geometry; the Home, Garden and Office controls change the view. Native page scrolling is preserved.
+
+Auto-rotation follows the existing motion pause preference, reduced-motion setting, visibility of the stage and visibility of the browser tab. Static renders remain available if WebGL or the interactive module cannot load. The 3D scene is an illustration of the brand, not a real service or property listing.
+
+The web viewer is Apache 2.0 licensed; its license is in `vendor/model-viewer-LICENSE.txt`. No additional paid software license or external 3D hosting is required. Editable Blender source and its generation script are supplied separately with the local project.

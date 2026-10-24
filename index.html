@@ -17,10 +17,12 @@
   <link rel="stylesheet" href="styles.css?v=2">
   <link rel="stylesheet" href="modern.css?v=2">
   <link rel="stylesheet" href="motion.css?v=3">
+  <link rel="stylesheet" href="world.css?v=4">
   <script src="config.js" defer></script>
   <script src="app.js?v=2" defer></script>
   <script src="enhancements.js?v=3" defer></script>
   <script src="motion.js?v=3" defer></script>
+  <script src="world.js?v=4" defer></script>
 </head>
 <body>
   <div class="page-progress" aria-hidden="true"></div>
@@ -52,16 +54,18 @@
         <div class="hero-buttons"><a class="button" href="#waitlist" data-hero-cta data-role-choice="customer"><span data-hero-cta-label>Get early access</span><span class="arrow-circle" aria-hidden="true">↗</span></a><button class="text-button watch-button"><span class="play-small" aria-hidden="true">▶</span><span data-i18n="watch">Meet Loqelo</span></button></div>
         <p class="hero-note"><img src="assets/check.svg" width="16" height="16" alt=""><span data-i18n="heroNote">Be first to know. No commitment, just possibilities.</span></p>
       </div>
-      <div class="hero-visual">
+      <div class="hero-visual has-3d">
         <div class="visual-topline"><span class="status-dot"></span><span data-i18n="visualNote">REAL LIFE, A LITTLE EASIER.</span><button class="motion-toggle" type="button" data-motion-toggle aria-label="Pause motion"><svg class="motion-pause" viewBox="0 0 16 16" aria-hidden="true"><path d="M4 3h3v10H4zm5 0h3v10H9z"/></svg><svg class="motion-play" viewBox="0 0 16 16" aria-hidden="true"><path d="M5 2.5v11l8-5.5z"/></svg><span data-motion-control-text>Pause motion</span></button></div>
-        <div class="hero-scene" data-scene="home">
-          <img class="scene-image" src="assets/scene-home.webp" alt="Local window cleaning professionals bringing a little help to a home" width="1000" height="1300" fetchpriority="high">
-          <div class="scene-shade"></div><span class="scene-top-tag">A little help. A brighter home.</span><span class="scene-corner-mark" aria-hidden="true">✳</span>
-          <div class="scene-bottom-copy"><small>GOOD PEOPLE. EVERYDAY POSSIBILITIES.</small><strong>Your place.<br>In good hands.</strong></div>
-          <div class="scene-selector" role="group" aria-label="Explore service examples"><button type="button" data-scene-choice="home" aria-pressed="true"><img src="assets/home.svg" width="15" height="15" alt=""><span data-enhance-copy="sceneHome">Home</span></button><button type="button" data-scene-choice="garden" aria-pressed="false"><img src="assets/sprout.svg" width="15" height="15" alt=""><span data-enhance-copy="sceneGarden">Garden</span></button><button type="button" data-scene-choice="office" aria-pressed="false"><img src="assets/briefcase.svg" width="15" height="15" alt=""><span data-enhance-copy="sceneOffice">Office</span></button></div>
+        <div class="world-stage" id="your-place-in-3d" data-view="home">
+          <div class="world-halo" aria-hidden="true"></div>
+          <img class="world-poster" src="assets/world-home.webp" alt="A handcrafted 3D miniature of a home, garden and workspace" width="1100" height="1100" fetchpriority="high">
+          <div class="world-top-controls"><div class="world-views" role="group" aria-label="Choose a view of the miniature"><button type="button" data-world-view="home" aria-pressed="true" data-world-copy="home">Home</button><button type="button" data-world-view="garden" aria-pressed="false" data-world-copy="garden">Garden</button><button type="button" data-world-view="office" aria-pressed="false" data-world-copy="office">Office</button></div><button class="world-toggle" type="button" aria-pressed="false"><svg viewBox="0 0 20 20" aria-hidden="true"><path d="m10 1.5 7.5 4.3v8.4L10 18.5l-7.5-4.3V5.8zM2.5 5.8l7.5 4.3 7.5-4.3M10 10.1v8.4M6.3 3.6l7.5 4.4"/></svg><span>Explore in 3D</span></button></div>
+          <span class="world-tagline" data-world-copy="tagline">A little help, wherever life happens.</span>
+          <div class="world-status" role="status" aria-live="polite" hidden></div>
+          <span class="world-hint" data-world-copy="drag" hidden>Drag to explore · Home, garden, office</span>
         </div>
         <div class="request-float"><div class="request-heading"><span class="request-icon"><img src="assets/message.svg" alt="" width="21" height="21"></span><span data-i18n="requestTitle">It starts with a simple sentence.</span><span class="request-tick" aria-hidden="true">✓</span></div><p data-i18n="sampleRequest">“I need my windows cleaned and the garden ready for spring.”</p><div class="match-tags"><span><img src="assets/home.svg" alt="" width="13" height="13"><span data-i18n="windowTag">Window cleaning</span></span><span><img src="assets/sprout.svg" alt="" width="13" height="13"><span data-i18n="gardenTag">Gardening</span></span><span class="match-indicator">✓ <span data-i18n="matched">Matched</span></span></div></div>
-        <span class="visual-footnote" data-i18n="previewNote">A little preview of what’s coming.</span>
+        <span class="visual-footnote" data-world-copy="preview">Illustrative 3D scene</span>
       </div>
     </section>
     <div class="promise-strip wrap"><p data-i18n="promiseIntro">Life happens here.<br>We help you take care of it.</p><span><img src="assets/home.svg" alt=""><span data-i18n="yourHome">Your home</span></span><span><img src="assets/sprout.svg" alt=""><span data-i18n="yourGarden">Your garden</span></span><span><img src="assets/briefcase.svg" alt=""><span data-i18n="yourOffice">Your office</span></span><span class="strip-end" data-i18n="andBeyond">And everything in between. ↗</span></div>
