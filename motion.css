@@ -86,9 +86,9 @@
 .motion-intro:not(.motion-paused) .hero-buttons{animation-delay:.42s}
 .motion-enabled .button .arrow-circle{transition:transform .35s cubic-bezier(.2,.7,.2,1)}
 .motion-enabled .button:hover .arrow-circle{transform:rotate(9deg)}
-.motion-enabled .mobile-nav:not([hidden]){animation:panel-arrive .26s ease-out both;transform-origin:top center}
-.motion-enabled dialog[open]{animation:panel-arrive .3s cubic-bezier(.2,.7,.2,1) both}
-.motion-enabled .signup-success:not([hidden]) .success-mark{animation:success-arrive .6s cubic-bezier(.2,1.5,.5,1) both}
+.motion-enabled:not(.motion-paused):not(.motion-hidden) .mobile-nav:not([hidden]){animation:panel-arrive .26s ease-out both;transform-origin:top center}
+.motion-enabled:not(.motion-paused):not(.motion-hidden) dialog[open]{animation:panel-arrive .3s cubic-bezier(.2,.7,.2,1) both}
+.motion-enabled:not(.motion-paused):not(.motion-hidden) .signup-success:not([hidden]) .success-mark{animation:success-arrive .6s cubic-bezier(.2,1.5,.5,1) both}
 .menu-button span{transition:transform .25s}
 .menu-button[aria-expanded='true'] span:first-child{transform:translateY(3.75px) rotate(45deg)}
 .menu-button[aria-expanded='true'] span:last-child{transform:translateY(-3.75px) rotate(-45deg)}

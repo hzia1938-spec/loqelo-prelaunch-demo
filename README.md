@@ -52,3 +52,11 @@ The hero features a custom Blender miniature of a home, garden and workspace. Th
 Auto-rotation follows the existing motion pause preference, reduced-motion setting, visibility of the stage and visibility of the browser tab. Static renders remain available if WebGL or the interactive module cannot load. The 3D scene is an illustration of the brand, not a real service or property listing.
 
 The web viewer is Apache 2.0 licensed; its license is in `vendor/model-viewer-LICENSE.txt`. No additional paid software license or external 3D hosting is required. Editable Blender source and its generation script are supplied separately with the local project.
+
+## Collections and usability refinement
+
+The service collections now open the relevant local task preview, with translated suggestions for home, garden and office. Visitors can edit any example and continue to the existing demo waitlist. These examples never create or send real service requests.
+
+The platform preview includes an expanded, keyboard-accessible dialog showing the currently selected official screenshot. On phones, a contextual early-access bar appears after the hero and disappears at the waitlist or while a menu/dialog is open. It preserves the selected customer/provider role. Navigation indicates the current section, and text, controls, forms and service cards have been refined for readability.
+
+Menu, dialog and signup confirmation entrance animations are disabled when motion is paused, so their content remains visible. Phone and tablet layouts, English/Polish/German text, task selection, the expanded preview, role handoff and the original 3D view are checked before publication. Mailing and analytics configuration remain as described above.
