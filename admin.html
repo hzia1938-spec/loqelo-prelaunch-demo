@@ -1,0 +1,96 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>Loqelo waitlist — contacts</title>
+<link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="assets/css/site.css">
+<style>
+  body{background:var(--bg)}
+  .adm{max-width:1100px;margin:0 auto;padding:40px 24px 80px}
+  .adm__top{display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap}
+  .adm__top img{height:34px}
+  .adm h1{font-family:var(--fd);font-weight:600;font-size:34px;letter-spacing:-.02em;margin:28px 0 6px}
+  .adm .note{color:var(--ink2);max-width:760px}
+  .kpis{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin:28px 0}
+  .kpi{background:#fff;border:1px solid var(--line);border-radius:18px;padding:18px 20px;box-shadow:var(--sh-1)}
+  .kpi b{display:block;font-family:var(--fd);font-weight:600;font-size:34px}
+  .kpi span{font-size:13px;color:var(--mute)}
+  .bar{display:flex;gap:10px;flex-wrap:wrap;align-items:center;margin-bottom:14px}
+  .bar select{height:42px;border-radius:999px;border:1px solid var(--line);padding:0 14px;background:#fff}
+  table{width:100%;border-collapse:collapse;background:#fff;border-radius:18px;overflow:hidden;box-shadow:var(--sh-1);font-size:14px}
+  th,td{text-align:left;padding:12px 14px;border-bottom:1px solid var(--line2)}
+  th{font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:var(--mute);background:#FAFCFB}
+  .tag{display:inline-block;padding:3px 10px;border-radius:999px;font-size:12px;font-weight:600}
+  .tag--customer{background:var(--mint-50);color:var(--mint-d)}.tag--provider{background:var(--blue-50);color:var(--blue)}
+  .empty{padding:40px;text-align:center;color:var(--mute)}
+  .countries{display:flex;flex-wrap:wrap;gap:8px;margin:0 0 24px}
+  .countries span{background:#fff;border:1px solid var(--line);border-radius:999px;padding:6px 12px;font-size:13px}
+  @media (max-width:720px){.kpis{grid-template-columns:1fr 1fr}table{font-size:12.5px}th,td{padding:10px 8px}}
+</style>
+</head>
+<body>
+<div class="adm">
+  <div class="adm__top"><a href="./"><img src="assets/logo.svg" alt="Loqelo"></a><a class="btn btn--ghost btn--sm" href="./">Back to the website</a></div>
+  <h1>Waitlist contacts</h1>
+  <p class="note">Demo mode: this page lists the sign-ups saved in <strong>this browser</strong>. When the site is connected to an email tool (MailerLite, Brevo or Google Sheets — see README.md), all sign-ups are collected there, split into customers and service providers, and can be exported to CSV from that tool.</p>
+  <div class="kpis">
+    <div class="kpi"><b data-k="all">0</b><span>All sign-ups</span></div>
+    <div class="kpi"><b data-k="customer">0</b><span>Customers</span></div>
+    <div class="kpi"><b data-k="provider">0</b><span>Service providers</span></div>
+    <div class="kpi"><b data-k="countries">0</b><span>Countries</span></div>
+  </div>
+  <div class="countries" data-countries></div>
+  <div class="bar">
+    <select data-filter><option value="">Everyone</option><option value="customer">Customers only</option><option value="provider">Service providers only</option></select>
+    <button class="btn btn--primary btn--sm" type="button" data-csv>Export CSV</button>
+    <button class="btn btn--ghost btn--sm" type="button" data-clear>Clear demo data</button>
+  </div>
+  <table>
+    <thead><tr><th>Date</th><th>Group</th><th>Email</th><th>Country</th><th>Type</th><th>Language</th><th>Consent</th></tr></thead>
+    <tbody data-rows></tbody>
+  </table>
+</div>
+<script>
+(function () {
+  var rows = [];
+  try { rows = JSON.parse(localStorage.getItem('loqelo_waitlist') || '[]'); } catch (e) { rows = []; }
+  var $ = function (s) { return document.querySelector(s); };
+  var esc = function (s) { return String(s == null ? '' : s).replace(/[&<>"]/g, function (c) { return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]; }); };
+  var name = function (c) { try { return new Intl.DisplayNames(['en'], { type: 'region' }).of(c); } catch (e) { return c; } };
+  function render() {
+    var f = $('[data-filter]').value, list = rows.filter(function (r) { return !f || r.role === f; });
+    $('[data-k="all"]').textContent = rows.length;
+    $('[data-k="customer"]').textContent = rows.filter(function (r) { return r.role === 'customer'; }).length;
+    $('[data-k="provider"]').textContent = rows.filter(function (r) { return r.role === 'provider'; }).length;
+    var by = {}; rows.forEach(function (r) { by[r.country] = (by[r.country] || 0) + 1; });
+    $('[data-k="countries"]').textContent = Object.keys(by).length;
+    $('[data-countries]').innerHTML = Object.keys(by).sort(function (a, b) { return by[b] - by[a]; }).map(function (c) { return '<span>' + esc(name(c)) + ' · ' + by[c] + '</span>'; }).join('');
+    $('[data-rows]').innerHTML = list.length ? list.slice().reverse().map(function (r) {
+      return '<tr><td>' + esc(new Date(r.created_at).toLocaleString()) + '</td><td><span class="tag tag--' + r.role + '">' + (r.role === 'customer' ? 'Customer' : 'Provider') + '</span></td><td>' + esc(r.email) +
+        '</td><td>' + esc(name(r.country)) + '</td><td>' + esc(r.account_type || '—') + '</td><td>' + esc((r.language || '').toUpperCase()) + '</td><td>' + (r.consent ? 'Yes' : 'No') + '</td></tr>';
+    }).join('') : '<tr><td colspan="7" class="empty">No sign-ups in this browser yet. Try the form on the website.</td></tr>';
+  }
+  $('[data-filter]').addEventListener('change', render);
+  $('[data-csv]').addEventListener('click', function () {
+    var f = $('[data-filter]').value, list = rows.filter(function (r) { return !f || r.role === f; });
+    var cols = ['created_at', 'role', 'email', 'country', 'account_type', 'language', 'consent', 'consent_text'];
+    var csv = [cols.join(',')].concat(list.map(function (r) {
+      return cols.map(function (c) { var v = String(r[c] == null ? '' : r[c]); return /[",\n]/.test(v) ? '"' + v.replace(/"/g, '""') + '"' : v; }).join(',');
+    })).join('\n');
+    var a = document.createElement('a');
+    a.href = URL.createObjectURL(new Blob(['﻿' + csv], { type: 'text/csv;charset=utf-8' }));
+    a.download = 'loqelo-waitlist' + (f ? '-' + f + 's' : '') + '.csv';
+    a.click();
+  });
+  $('[data-clear]').addEventListener('click', function () {
+    if (!confirm('Delete the demo sign-ups stored in this browser?')) return;
+    rows = []; localStorage.removeItem('loqelo_waitlist'); render();
+  });
+  render();
+})();
+</script>
+</body>
+</html>
